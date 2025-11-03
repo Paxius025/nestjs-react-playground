@@ -5,6 +5,7 @@ import { CreateUserDto } from '../user/dto/create-user.dto';
 @Injectable()
 export class HashPasswordPipe implements PipeTransform {
   async transform(value: CreateUserDto): Promise<CreateUserDto> {
+    console.log('before hashing: ', value);
     if (!value.password) {
       throw new BadRequestException('Password is required');
     }
@@ -17,7 +18,7 @@ export class HashPasswordPipe implements PipeTransform {
       console.error('Error hashing password:', error);
       throw new BadRequestException('Error hashing password');
     }
-
+    console.log('after hashing: ', { ...value, password: hashedPassword });
     return {
       ...value,
       password: hashedPassword,

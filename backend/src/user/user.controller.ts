@@ -37,7 +37,15 @@ export class UserController {
 
   @Get(':user_id')
   findOne(@Param('user_id', ParseIntPipe) id: number) {
-    return this.userService.findOne(id);
+    const user = this.userService.findOne(id);
+
+    if (user === null) {
+      return { message: `User with ID ${id} not found` };
+    }
+
+    return user;
+
+    // return this.userService.findOne(id);
   }
 
   @Patch(':user_id')
