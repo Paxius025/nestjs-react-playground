@@ -1,5 +1,5 @@
 FROM node:20-alpine
-WORKDIR /backend
+WORKDIR /app
 
 # Copy package.json + yarn.lock
 COPY package*.json yarn.lock ./
