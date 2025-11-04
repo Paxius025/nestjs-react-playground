@@ -9,9 +9,10 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { UserService } from 'src/user/user.service';
 import { jwtConstants } from '../SharedModule/constants';
+import { User } from 'src/user/entities/user.entity';
 
 interface RequestWithUser extends Request {
-  user?: any;
+  user?: User;
 }
 
 @Injectable()

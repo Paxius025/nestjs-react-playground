@@ -15,8 +15,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { HashPasswordPipe } from 'src/pipe/hash-password-pipe';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/guard/jwt-auth.guard';
 import { User } from './entities/user.entity';
+
+// RBAC: Role-Based Access Control
+import { Roles } from 'src/decorators/decorators';
+import { RolesGuard } from 'src/guard/roles.guard';
 
 interface RequestWithUser extends Request {
   user?: User;
@@ -59,6 +63,8 @@ export class UserController {
   }
 
   @Delete(':user_id')
+  @UseGuards(RolesGuard)
+  @Roles('Admin')
   remove(@Param('user_id', ParseIntPipe) id: number) {
     return this.userService.remove(id);
   }
