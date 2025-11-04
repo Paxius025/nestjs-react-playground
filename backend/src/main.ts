@@ -7,6 +7,8 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .setTitle('User Management API')
     .setDescription('API documentation for the User Management system')
