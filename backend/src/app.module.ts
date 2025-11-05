@@ -13,7 +13,6 @@ import { PostsModule } from './posts/posts.module';
       isGlobal: true,
     }),
 
-    // ใช้ ConfigService เพื่ออ่านค่า env
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

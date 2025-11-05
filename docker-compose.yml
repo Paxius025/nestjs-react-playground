@@ -1,14 +1,4 @@
 services:
-  database:
-    image: postgres:16
-    container_name: database
-    restart: always
-    env_file: .env
-    ports:
-      - "5433:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   backend:
     build: ./backend
     container_name: backend
@@ -22,6 +12,13 @@ services:
       - ./backend:/app
       - /app/node_modules
     command: yarn start:dev
+    develop:
+      watch:
+        - action: sync
+          path: ./backend
+          target: /app
+        - action: rebuild
+          path: ./backend/package.json
 
   frontend:
     build: ./frontend
@@ -35,7 +32,23 @@ services:
       - ./frontend:/app
       - /app/node_modules
     command: yarn dev --host
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /app
+        - action: rebuild
+          path: ./frontend/package.json
+
+  database:
+    image: postgres:16
+    container_name: database
+    restart: always
+    env_file: .env
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:
-

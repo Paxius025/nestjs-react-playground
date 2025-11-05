@@ -30,9 +30,7 @@ interface RequestWithUser extends Request {
 @UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {
-    console.log('UserController initialized');
-  }
+  constructor(private readonly userService: UserService) {}
 
   @Post()
   @ApiBody({ type: CreateUserDto })
