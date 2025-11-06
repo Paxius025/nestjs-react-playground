@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
+import { TrackingDroneLogModule } from './tracking_drone_log/tracking_drone_log.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PostsModule } from './posts/posts.module';
     UserModule,
     AuthModule,
     PostsModule,
+    TrackingDroneLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
