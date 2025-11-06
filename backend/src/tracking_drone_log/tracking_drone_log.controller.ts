@@ -1,13 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TrackingDroneLogService } from './tracking_drone_log.service';
 import { CreateTrackingDroneLogDto } from './dto/create-tracking_drone_log.dto';
 import { UpdateTrackingDroneLogDto } from './dto/update-tracking_drone_log.dto';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('tracking-drone-log')
 export class TrackingDroneLogController {
-  constructor(private readonly trackingDroneLogService: TrackingDroneLogService) {}
+  constructor(
+    private readonly trackingDroneLogService: TrackingDroneLogService,
+  ) {}
 
   @Post()
+  @ApiBody({ type: CreateTrackingDroneLogDto })
   create(@Body() createTrackingDroneLogDto: CreateTrackingDroneLogDto) {
     return this.trackingDroneLogService.create(createTrackingDroneLogDto);
   }
@@ -23,7 +35,10 @@ export class TrackingDroneLogController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTrackingDroneLogDto: UpdateTrackingDroneLogDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateTrackingDroneLogDto: UpdateTrackingDroneLogDto,
+  ) {
     return this.trackingDroneLogService.update(+id, updateTrackingDroneLogDto);
   }
 

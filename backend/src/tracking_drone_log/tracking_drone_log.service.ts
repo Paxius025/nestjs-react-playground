@@ -1,26 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTrackingDroneLogDto } from './dto/create-tracking_drone_log.dto';
 import { UpdateTrackingDroneLogDto } from './dto/update-tracking_drone_log.dto';
+import { TrackingDroneLog } from './entities/tracking_drone_log.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TrackingDroneLogService {
+  constructor(
+    @InjectRepository(TrackingDroneLog)
+    private trackingDroneLogRepository: Repository<TrackingDroneLog>,
+  ) {}
+
   create(createTrackingDroneLogDto: CreateTrackingDroneLogDto) {
-    return 'This action adds a new trackingDroneLog';
+    const trackingDroneLog = this.trackingDroneLogRepository.create(
+      createTrackingDroneLogDto,
+    );
+    return this.trackingDroneLogRepository.save(trackingDroneLog);
   }
 
   findAll() {
-    return `This action returns all trackingDroneLog`;
+    return this.trackingDroneLogRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} trackingDroneLog`;
+    return this.trackingDroneLogRepository.findOneBy({ id });
   }
 
   update(id: number, updateTrackingDroneLogDto: UpdateTrackingDroneLogDto) {
-    return `This action updates a #${id} trackingDroneLog`;
+    return this.trackingDroneLogRepository.update(
+      id,
+      updateTrackingDroneLogDto,
+    );
   }
 
   remove(id: number) {
-    return `This action removes a #${id} trackingDroneLog`;
+    return this.trackingDroneLogRepository.delete(id);
   }
 }
