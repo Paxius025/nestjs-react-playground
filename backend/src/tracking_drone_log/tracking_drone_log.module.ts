@@ -8,6 +8,6 @@ import { TrackingDroneLog } from './entities/tracking_drone_log.entity';
   imports: [TypeOrmModule.forFeature([TrackingDroneLog])],
   controllers: [TrackingDroneLogController],
   providers: [TrackingDroneLogService],
-  exports: [TrackingDroneLogService, TrackingDroneLogModule],
+  exports: [TrackingDroneLogService],
 })
 export class TrackingDroneLogModule {}

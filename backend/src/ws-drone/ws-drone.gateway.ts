@@ -11,8 +11,7 @@ import { Server, Socket } from 'socket.io';
 
 import { CreateTrackingDroneLogDto } from 'src/tracking_drone_log/dto/create-tracking_drone_log.dto';
 import { TrackingDroneLog } from 'src/tracking_drone_log/entities/tracking_drone_log.entity';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { TrackingDroneLogService } from 'src/tracking_drone_log/tracking_drone_log.service';
 
 @WebSocketGateway({
   cors: {
@@ -26,8 +25,7 @@ export class WsDroneGateway
   server!: Server;
 
   constructor(
-    @InjectRepository(TrackingDroneLog)
-    private trackingDroneLogRepository: Repository<TrackingDroneLog>,
+    private readonly trackingDroneLogService: TrackingDroneLogService,
   ) {}
 
   handleConnection(@ConnectedSocket() client: Socket) {
@@ -42,9 +40,6 @@ export class WsDroneGateway
   async handleCreateTrackingDroneLog(
     @MessageBody() createTrackingDroneLogDto: CreateTrackingDroneLogDto,
   ): Promise<TrackingDroneLog> {
-    const newLog = this.trackingDroneLogRepository.create(
-      createTrackingDroneLogDto,
-    );
-    return this.trackingDroneLogRepository.save(newLog);
+    return this.trackingDroneLogService.create(createTrackingDroneLogDto);
   }
 }
