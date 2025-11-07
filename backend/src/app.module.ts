@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
 import { TrackingDroneLogModule } from './tracking_drone_log/tracking_drone_log.module';
+import { WsDroneModule } from './ws-drone/ws-drone.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { TrackingDroneLogModule } from './tracking_drone_log/tracking_drone_log.
     AuthModule,
     PostsModule,
     TrackingDroneLogModule,
+    WsDroneModule,
   ],
   controllers: [AppController],
   providers: [AppService],
