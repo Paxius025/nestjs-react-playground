@@ -50,5 +50,18 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  mongodb:
+    image: mongo:latest # Or a specific version like mongo:6
+    container_name: my-mongodb
+    ports:
+      - "27017:27017" # Host_Port:Container_Port
+    volumes:
+      - mongodb_data:/data/db # Persist data in a named volume
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    restart: unless-stopped
+
 volumes:
   pgdata:
+  mongodb_data:
