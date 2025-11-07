@@ -26,7 +26,7 @@ export class TrackingDroneLog {
   @Column()
   bbox_y2!: number;
 
-  @Column()
+  @Column('float')
   confidence_score!: number;
 
   @CreateDateColumn()

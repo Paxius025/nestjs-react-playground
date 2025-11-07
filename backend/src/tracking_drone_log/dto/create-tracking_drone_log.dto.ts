@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString, IsDecimal } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateTrackingDroneLogDto {
   @ApiProperty({ example: 'Entered' })
@@ -23,6 +23,6 @@ export class CreateTrackingDroneLogDto {
   bbox_y2!: number;
 
   @ApiProperty({ example: 0.9 })
-  @IsNumber()
+  @IsDecimal({ force_decimal: true, decimal_digits: '2' })
   confidence_score!: number;
 }
